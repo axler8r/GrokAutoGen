@@ -4,5 +4,22 @@
 			"path": "."
 		}
 	],
-	"settings": {}
+	"settings": {
+		"files.exclude": {
+			"**/.DS_Store": true,
+			"**/Thumbs.db": true,
+			"**/__pycache__": true,
+			"**/tags": true,
+			"**/tags.lock": true,
+			"**/tags.temp": true,
+		},
+		"material-icon-theme.files.associations": {
+			"pyproject.toml": "settings",
+			".cliff.toml": "settings",
+			".python-version": "settings",
+		},
+		"material-icon-theme.folders.associations": {
+			"grokautogen": "python",
+		}
+	}
 }
