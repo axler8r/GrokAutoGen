@@ -2,7 +2,7 @@
 Background:
 - 35 years old
 - Married with one child
-- Works in finance
+- Works in manufacturing
 - Enjoys cooking
 
 Investment preferences:  
