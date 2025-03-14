@@ -8,7 +8,6 @@ from autogen_agentchat.teams import RoundRobinGroupChat
 from autogen_agentchat.ui import Console
 from autogen_ext.models.openai import OpenAIChatCompletionClient
 from dotenv import load_dotenv
-from typing_extensions import Annotated
 
 load_dotenv()
 
@@ -22,24 +21,21 @@ investment_advisor = AssistantAgent(
     system_message="""
         You are the face of the investment team.
 
-        You look for investment opportunites based on a client's requirements.
-        You make seven recommendations. You depend on the Portfolio Manger to
-        cut down the investments to four. You present the investment advice back
-        to the customer.
+        You look for investment opportunities based on a client's requirements.
+        You make seven recommendations. Your recommendations must contain
+        relevan tickers. You depend on the Portfolio Manger to cut down the
+        investments to four.
     """.strip(),
 )
 
 
 async def lookup_investment_profile(client_name: str):
-    with open(f"data/investor/Profile{client_name}.md") as f:
-        investment_profile = f.read()
-    return investment_profile
-
-
-async def lookup_current_market_conditions(
-    _ticker: str,
-):  # , _blah: Annotated[str, "blah"]):
-    return "The market is currently bearish."
+    try:
+        with open(f"data/investor/Profile{client_name}.md") as f:
+            investment_profile = f.read()
+        return investment_profile
+    except [FileNotFoundError, IOError]:
+        return "This user does not exist. Use a standard medium riks profile."
 
 
 portfolio_helper = AssistantAgent(
@@ -47,7 +43,6 @@ portfolio_helper = AssistantAgent(
     model_client=model_client,
     tools=[
         lookup_investment_profile,
-        # lookup_current_market_conditions,
     ],
     system_message="""
         You are the investment team's back office support.
@@ -57,7 +52,7 @@ portfolio_helper = AssistantAgent(
     """.strip(),
 )
 
-portolio_manager = AssistantAgent(
+portfolio_manager = AssistantAgent(
     name="portfolio_manager",
     model_client=model_client,
     system_message="""
@@ -72,18 +67,18 @@ portolio_manager = AssistantAgent(
 
 termination_condition = TextMentionTermination("APPROVE")
 
-invetment_team = RoundRobinGroupChat(
+investment_team = RoundRobinGroupChat(
     [
         investment_advisor,
         portfolio_helper,
-        portolio_manager,
+        portfolio_manager,
     ],
     termination_condition=termination_condition,
 )
 
 
 async def verbose_run(task):
-    async for message in invetment_team.run_stream(task=task):
+    async for message in investment_team.run_stream(task=task):
         if isinstance(message, TaskResult):
             print(f"{message.stop_reason=}")
         else:
@@ -91,7 +86,7 @@ async def verbose_run(task):
 
 
 async def quiet_run(task) -> None:
-    await Console(invetment_team.run_stream(task=task))
+    await Console(investment_team.run_stream(task=task))
 
 
 if __name__ == "__main__":
