@@ -10,3 +10,5 @@ ipython_config.py
 .ruff_cache/
 .python-version
 
+.env*
+.attic/
