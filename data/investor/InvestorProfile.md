@@ -2,7 +2,7 @@
 Background:
 - 30 years old
 - Single
-- No dependents
+- No dependent
 - Works in tech
 - Enjoys travel
 
@@ -40,7 +40,7 @@ Background:
 - Enjoys reading
 
 Investment preferences:  
-- **Intergenerational wealth building** for her grandchildren.  
+- **Inter-generational wealth building** for her grandchildren.  
 - Prefers **one-time lump sum investments** per grandchild.  
 - Seeks **low-risk, long-term growth** options like **trust funds** or
   **government bonds**.  
@@ -52,7 +52,7 @@ Investment preferences:
 Background:
 - 25 years old
 - Single
-- No dependents
+- No dependent
 - Works as a carpenter
 - Enjoys surfing
 

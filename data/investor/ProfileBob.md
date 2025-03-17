@@ -2,7 +2,7 @@
 Background:
 - 30 years old
 - Single
-- No dependents
+- No dependent
 - Works in tech
 - Enjoys travel
 

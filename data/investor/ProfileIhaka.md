@@ -2,7 +2,7 @@
 Background:
 - 25 years old
 - Single
-- No dependents
+- No dependent
 - Works as a carpenter
 - Enjoys surfing
 
