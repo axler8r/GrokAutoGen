@@ -151,6 +151,10 @@ azure = [
 diskcache = [
     { name = "diskcache" },
 ]
+file-surfer = [
+    { name = "autogen-agentchat" },
+    { name = "markitdown" },
+]
 magentic-one = [
     { name = "autogen-agentchat" },
     { name = "markitdown" },
@@ -161,6 +165,12 @@ openai = [
     { name = "aiofiles" },
     { name = "openai" },
     { name = "tiktoken" },
+]
+web-surfer = [
+    { name = "autogen-agentchat" },
+    { name = "markitdown" },
+    { name = "pillow" },
+    { name = "playwright" },
 ]
 
 [[package]]
@@ -593,7 +603,7 @@ version = "0.1.0"
 source = { virtual = "." }
 dependencies = [
     { name = "autogen-agentchat" },
-    { name = "autogen-ext", extra = ["diskcache", "openai"] },
+    { name = "autogen-ext", extra = ["diskcache", "file-surfer", "openai", "web-surfer"] },
     { name = "loguru" },
     { name = "pydantic" },
     { name = "python-dotenv" },
@@ -610,7 +620,7 @@ dev = [
 [package.metadata]
 requires-dist = [
     { name = "autogen-agentchat", specifier = ">=0.4.7" },
-    { name = "autogen-ext", extras = ["diskcache", "openai"], specifier = ">=0.4.7" },
+    { name = "autogen-ext", extras = ["diskcache", "file-surfer", "openai", "web-surfer"], specifier = ">=0.4.7" },
     { name = "loguru", specifier = ">=0.7.3" },
     { name = "pydantic", specifier = ">=2.10.6" },
     { name = "python-dotenv", specifier = ">=1.0.1" },

@@ -6,7 +6,7 @@ readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
     "autogen-agentchat>=0.4.7",
-    "autogen-ext[diskcache,openai]>=0.4.7",
+    "autogen-ext[diskcache,file-surfer,openai,web-surfer]>=0.4.7",
     "loguru>=0.7.3",
     "pydantic>=2.10.6",
     "python-dotenv>=1.0.1",

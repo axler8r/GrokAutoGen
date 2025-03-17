@@ -1,3 +1,6 @@
+# global settings
+SHELL = /usr/bin/env zsh
+
 # command aliases
 PYTHON = python3
 
@@ -12,10 +15,10 @@ RES_DIR = resource
 TST_DIR = test
 
 # phony targets
-.PHONY: all                                                              \
-		clean-all clean-resources clean-logs clean-output clean-runfiles \
-		check check-test                                                 \
-		test test-verbose                                                \
+.PHONY: all                                                          \
+		clean clean-resources clean-logs clean-output clean-runfiles \
+		check format spell                                           \
+		test test-verbose                                            \
 		help
 
 # targets
@@ -40,7 +43,7 @@ clean-logs:
 clean-resources:
 	rm -f $(RES_DIR)/*
 
-clean-all: clean-runfiles clean-output clean-logs clean-resources
+clean: clean-runfiles clean-output clean-logs clean-resources
 
 format:
 	@echo "Formatting $(PROJECT_NAME)..."
@@ -49,10 +52,6 @@ format:
 check:
 	@echo "Checking $(PROJECT_NAME)..."
 	ruff check
-
-check-test:
-	@echo "Checking $(PROJECT_NAME)..."
-	$(PYTHON) -m mypy $(TST_DIR)
 
 test:
 	@echo "Testing $(TST_DIR)..."
@@ -64,7 +63,12 @@ test-verbose:
 
 changelog:
 	@echo "Generating $(PROJECT_NAME)'s latest changelog..."
-	git cliff --bump --config .cliff.toml >> CHANGELOG.md
+	git cliff --bump --config .cliff.toml --unreleased
+
+spell:
+	@echo "Checking spelling..."
+	foreach file in **/*.md; do if [[ -f "$$file" ]]; then aspell --lang=en_GB check "$$file"; fi; done
+	foreach file in **/*.py; do if [[ -f "$$file" ]]; then aspell --lang=en_GB check "$$file"; fi; done
 
 help:
 	@echo "Usage: make [target]"
@@ -73,14 +77,13 @@ help:
 	@echo "  init:            Initialize the project"
 	@echo "  activate:        Activate poetry shell"
 	@echo "  deactivate:      Deactivate the existing poetry shell"
-	@echo "  clean-all:       Clean all generated files"
+	@echo "  clean:           Clean all generated files"
 	@echo "  clean-resources: Clean resource files"
 	@echo "  clean-logs:      Clean log files"
 	@echo "  clean-output:    Clean output files"
 	@echo "  clean-runfiles:  Clean run files"
 	@echo "  format:          Format the project"
 	@echo "  check:           Check implementation"
-	@echo "  check-tests:     Check tests"
 	@echo "  test:            Test the project"
 	@echo "  test-verbose:    Test the project with verbose output"
 	@echo "  changelog:       Update the changelog"
