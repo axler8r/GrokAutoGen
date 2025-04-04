@@ -8,6 +8,7 @@ dependencies = [
     "autogen-agentchat>=0.4.7",
     "autogen-ext[diskcache,file-surfer,openai,web-surfer]>=0.4.7",
     "loguru>=0.7.3",
+    "pandas>=2.2.3",
     "pydantic>=2.10.6",
     "python-dotenv>=1.0.1",
     "yfinance>=0.2.54",
@@ -17,5 +18,8 @@ dependencies = [
 dev = [
     "autogenstudio>=0.4.1.8",
     "git-cliff>=2.8.0",
+    "ipykernel>=6.29.5",
+    "matplotlib>=3.10.1",
     "nbstripout>=0.8.1",
+    "pip>=25.0.1",
 ]
