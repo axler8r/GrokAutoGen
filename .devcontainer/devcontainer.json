@@ -1,0 +1,32 @@
+{
+    "name": "Microsoft Agentic Frameworks",
+    "image": "mcr.microsoft.com/devcontainers/python:1-3.12-bullseye",
+    "runArgs": [
+        "--name", "GrokAutoGen",
+        "--hostname", "grokautogen.local",
+        "--cpus", "2",
+        "--memory", "8g"
+    ],
+    "features": {
+        "ghcr.io/devcontainers-extra/features/apt-packages:1": {
+            "packages": [
+                "tig"
+            ]
+        },
+        "ghcr.io/va-h/devcontainers-features/uv:1": {
+            "shellautocompletion": true
+        },
+        "ghcr.io/devcontainers-extra/features/ruff:1": {}
+    },
+    "postCreateCommand": "echo set line-graphics = utf-8 >> /home/vscode/.tigrc",
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "charliermarsh.ruff",
+                "ms-toolsai.python-ds-extension-pack",
+                "streetsidesoftware.code-spell-checker",
+                "tamasfe.even-better-toml"
+            ]
+        }
+    }
+}
