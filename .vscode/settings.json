@@ -1,5 +1,10 @@
 {
     "cSpell.enabledFileTypes": {
         "python": false
-    }
+    },
+    "python.testing.pytestArgs": [
+        "test"
+    ],
+    "python.testing.unittestEnabled": false,
+    "python.testing.pytestEnabled": true
 }
