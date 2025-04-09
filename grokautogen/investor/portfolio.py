@@ -29,10 +29,10 @@ investment_advisor = AssistantAgent(
 )
 
 
-async def lookup_investment_profile(client_name: str):
+async def lookup_investment_profile(client_name: str) -> str:
     try:
         with open(f"data/investor/Profile{client_name}.md") as f:
-            investment_profile = f.read()
+            investment_profile: str = f.read()
         return investment_profile
     except [FileNotFoundError, IOError]:
         return "This user does not exist. Use a standard medium riks profile."
@@ -77,7 +77,7 @@ investment_team = RoundRobinGroupChat(
 )
 
 
-async def verbose_run(task):
+async def verbose_run(task) -> None:
     async for message in investment_team.run_stream(task=task):
         if isinstance(message, TaskResult):
             print(f"{message.stop_reason=}")
@@ -90,9 +90,9 @@ async def quiet_run(task) -> None:
 
 
 if __name__ == "__main__":
-    name = input("Hello. What is your name? ")
-    investment = input("What investment are you considering? ")
-    task = f"{name} is considering investing in {investment}."
+    name: str = input("Hello. What is your name? ")
+    investment: str = input("What investment are you considering? ")
+    task: str = f"{name} is considering investing in {investment}."
     if "--verbose" in sys.argv:
         sys.argv.remove("--verbose")
         asyncio.run(verbose_run(task))
