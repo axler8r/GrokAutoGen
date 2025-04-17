@@ -9,6 +9,7 @@ dependencies = [
     "autogen-ext[diskcache,file-surfer,openai,web-surfer]>=0.4.7",
     "loguru>=0.7.3",
     "pandas>=2.2.3",
+    "passlib[bcrypt]>=1.7.4",
     "pydantic>=2.10.6",
     "pydantic-settings>=2.8.0",
     "python-dotenv>=1.0.1",
