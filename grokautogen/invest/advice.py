@@ -7,39 +7,79 @@ def main() -> None:
         parser.add_subparsers(dest="command", required=True)
     )
 
+    # register
+    register_parser: argparse.ArgumentParser = subparsers.add_parser(
+        "register",
+        help="Register a new user",
+    )
+    register_parser.add_argument(
+        "--id",
+        type=str,
+        required=False,
+        help="User id",
+    )
+    register_parser.add_argument(
+        "--password",
+        type=str,
+        required=False,
+        help="User password",
+    )
+
     # login
     login_parser: argparse.ArgumentParser = subparsers.add_parser(
-        "login", help="Login to the system"
+        "login",
+        help="Login to the system",
     )
     login_parser.add_argument(
-        "--id", type=str, required=False, help="User id"
+        "--id",
+        type=str,
+        required=False,
+        help="User id",
     )
 
     # advice
     advice_parser: argparse.ArgumentParser = subparsers.add_parser(
-        "advice", help="Get investment advice"
+        "advice",
+        help="Get investment advice",
     )
-    advice_parser.add_argument("query", type=str, help="The query to ask")
+    advice_parser.add_argument(
+        "query",
+        type=str,
+        help="The query to ask",
+    )
 
     # configure
     configure_parser: argparse.ArgumentParser = subparsers.add_parser(
-        "configure", help="Configure settings"
+        "configure",
+        help="Configure settings",
     )
     configure_parser.add_argument(
-        "--key", type=str, required=True, help="Configuration key"
+        "--key",
+        type=str,
+        required=True,
+        help="Configuration key",
     )
     configure_parser.add_argument(
-        "--value", type=str, required=True, help="Configuration value"
+        "--value",
+        type=str,
+        required=True,
+        help="Configuration value",
     )
 
     args: argparse.Namespace = parser.parse_args()
 
-    if args.command == "login":
+    if args.command == "register":
+        handle_register(args.id, args.password)
+    elif args.command == "login":
         handle_login(args.id)
     elif args.command == "advice":
         handle_advice(args.query)
     elif args.command == "configure":
         handle_configure(args.key, args.value)
+
+
+def handle_register(id: str = None, password: str = None) -> None:
+    print(f"Handling 'register' command with id: {id}, password: {password}")
 
 
 def handle_login(id: str = None) -> None:
