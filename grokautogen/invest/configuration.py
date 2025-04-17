@@ -119,6 +119,20 @@ class Configuration(BaseSettings):
             raise FileNotFoundError(f"Configuration file not found at {path}")
         except Exception as e:
             raise RuntimeError(f"Failed to read configuration file: {e}") from e
+        
+    @classmethod
+    def load(cls, path: Path) -> "Configuration":
+        """
+        Loads the configuration from the specified file path.
+
+        Args:
+            path (Path): The file path to the configuration file.
+
+        Returns:
+            Configuration: The loaded configuration object.
+        """
+        return cls.read(path)
+
 
     def write(self, path: Path) -> None:
         """
@@ -144,6 +158,21 @@ class Configuration(BaseSettings):
             raise ValueError(f"Invalid configuration: {e}") from e
         except IOError as e:
             raise IOError(f"Failed to write configuration to {path}: {e}") from e
+        
+
+    def save(self, path: Path) -> None:
+        """
+        Saves the configuration to the specified file path.
+
+        Args:
+            path (Path): The file path where the configuration will be saved.
+
+        Raises:
+            ValueError: If the configuration object is invalid.
+            IOError: If there is an error writing to the file.
+        """
+        self.write(path)
+
 
     def update(self, path: Path) -> None:
         """
@@ -162,12 +191,12 @@ class Configuration(BaseSettings):
             if not path.exists():
                 raise FileNotFoundError(f"Configuration file not found at {path}")
 
-            existing_config: Configuration = self.read(path)
+            existing_config: Configuration = self.load(path)
             updated_config: Configuration = existing_config.model_copy(
                 update=self.model_dump()
             )
             updated_config.model_validate(obj=updated_config)
-            updated_config.write(path)
+            updated_config.save(path)
         except FileNotFoundError as e:
             raise FileNotFoundError(f"Configuration file not found: {e}") from e
         except ValueError as e:
@@ -241,9 +270,3 @@ the investment is suitable for the client's portfolio.""",
             raise ValueError(f"Invalid configuration: {e}") from e
         except Exception as e:
             raise RuntimeError(f"Failed to convert configuration to JSON: {e}") from e
-
-
-# if __name__ == "__main__":
-#     config: Configuration = Configuration.default()
-#     print(config.to_json())
-#     print(config.prompts["investment_advisor"].prompt)

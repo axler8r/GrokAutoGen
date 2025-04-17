@@ -1,6 +1,6 @@
 import pytest
 from pathlib import Path
-from grokautogen.investor.configuration import Configuration, APISpecification
+from grokautogen.invest.configuration import Configuration, APISpecification
 
 
 @pytest.fixture
