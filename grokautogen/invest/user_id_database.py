@@ -174,7 +174,7 @@ class Cookie(BaseModel):
         Determines if the user's session has expired.
 
         Returns:
-            bool: True if the time elapsed since the last login exceeds 3600 seconds (1 hour), 
+            bool: True if the time elapsed since the last login exceeds 3600 seconds (1 hour),
             otherwise False.
         """
         return (datetime.now() - self.last_login).total_seconds() > 3600
@@ -217,11 +217,10 @@ class UserDB(BaseModel):
         def default_serializer(obj) -> str:
             if isinstance(obj, datetime):
                 return obj.isoformat()
-            raise TypeError(f"Type {type(obj)} not serializable")
+            raise TypeError(f"Type {type(obj)} not serialisable")
 
         with open(filepath, "w") as f:
             json.dump(self.model_dump(), f, indent=2, default=default_serializer)
-
 
     @classmethod
     def load(cls, filepath: str = "user.json"):

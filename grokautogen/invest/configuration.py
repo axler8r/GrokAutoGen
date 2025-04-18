@@ -11,8 +11,8 @@ Classes:
 
 Usage:
     This module is designed to handle configuration files for the application, ensuring
-    they are validated and serialized correctly. It supports merging new configurations
-    with existing ones and provides a default configuration for initialization.
+    they are validated and serialised correctly. It supports merging new configurations
+    with existing ones and provides a default configuration for initialisation.
 
 Example:
     from pathlib import Path
@@ -119,7 +119,7 @@ class Configuration(BaseSettings):
             raise FileNotFoundError(f"Configuration file not found at {path}")
         except Exception as e:
             raise RuntimeError(f"Failed to read configuration file: {e}") from e
-        
+
     @classmethod
     def load(cls, path: Path) -> "Configuration":
         """
@@ -132,7 +132,6 @@ class Configuration(BaseSettings):
             Configuration: The loaded configuration object.
         """
         return cls.read(path)
-
 
     def write(self, path: Path) -> None:
         """
@@ -158,7 +157,6 @@ class Configuration(BaseSettings):
             raise ValueError(f"Invalid configuration: {e}") from e
         except IOError as e:
             raise IOError(f"Failed to write configuration to {path}: {e}") from e
-        
 
     def save(self, path: Path) -> None:
         """
@@ -172,7 +170,6 @@ class Configuration(BaseSettings):
             IOError: If there is an error writing to the file.
         """
         self.write(path)
-
 
     def update(self, path: Path) -> None:
         """
@@ -261,7 +258,7 @@ the investment is suitable for the client's portfolio.""",
 
         Raises:
             ValueError: If the configuration object is invalid or cannot
-                be serialized.
+                be serialised.
         """
         try:
             self.model_validate(obj=self)

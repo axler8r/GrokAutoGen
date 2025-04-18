@@ -22,7 +22,7 @@ def get_city_from_command_line() -> str:
 
 # Define a simple function tool that the agent can use.  For this example, we
 # use a fake weather tool for demonstration purposes.
-async def weather_forcast_tool(city: str) -> str:
+async def weather_forecast_tool(city: str) -> str:
     """Get the weather for a given city."""
     return f"The weather sunny in {city}."
 
@@ -34,11 +34,11 @@ async def new_zealand_weather_forecast_tool(city: str) -> str:
 
 # Define an AssistantAgent with the model, tool, system message, and reflection
 # enabled.  The system message instructs the agent via natural language.
-weather_forcaster = AssistantAgent(
+weather_forecaster = AssistantAgent(
     name="weather_agent",
     model_client=model_client,
-    tools=[weather_forcast_tool, new_zealand_weather_forecast_tool],
-    system_message="""You forcast the whether and use different tools based on
+    tools=[weather_forecast_tool, new_zealand_weather_forecast_tool],
+    system_message="""You forecast the whether and use different tools based on
     whether the city is in New Zealand or not.""",
     reflect_on_tool_use=True,
     model_client_stream=True,  # Enable streaming tokens from the model client.
@@ -53,7 +53,7 @@ async def main() -> None:
 
     The agent will use different tools based on whether the city is in New Zealand or not.
     """
-    await Console(weather_forcaster.run_stream(task=f"What is the weather in {city}?"))
+    await Console(weather_forecaster.run_stream(task=f"What is the weather in {city}?"))
 
 
 # NOTE: if running this inside a Python script you'll need to use asyncio.run(main()).

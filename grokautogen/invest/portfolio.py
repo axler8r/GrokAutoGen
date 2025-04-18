@@ -23,7 +23,7 @@ investment_advisor = AssistantAgent(
 
         You look for investment opportunities based on a client's requirements.
         You make seven recommendations. Your recommendations must contain
-        relevan tickers. You depend on the Portfolio Manger to cut down the
+        relevant tickers. You depend on the Portfolio Manger to cut down the
         investments to four.
     """.strip(),
 )
@@ -35,7 +35,7 @@ async def lookup_investment_profile(client_name: str) -> str:
             investment_profile: str = f.read()
         return investment_profile
     except [FileNotFoundError, IOError]:
-        return "This user does not exist. Use a standard medium riks profile."
+        return "This user does not exist. Use a standard medium risk profile."
 
 
 portfolio_helper = AssistantAgent(
