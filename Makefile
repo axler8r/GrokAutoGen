@@ -35,12 +35,31 @@ clean-runfiles:
 	rm -rf **/.ipynb_checkpoints
 
 clean-output:
-	rm -f $(OUT_DIR)/*
+	@echo "Cleaning $(OUT_DIR)..."
+	@if [ -d "$(OUT_DIR)" ]; then 						\
+		echo "Cleaning $(OUT_DIR) directory..."; 		\
+		rm -rf $(OUT_DIR)/*; 							\
+	else 												\
+		echo "$(OUT_DIR) directory does not exist."; 	\
+	fi
 
 clean-logs:
-	rm -f $(LOG_DIR)/*
+	@echo "Cleaning $(LOG_DIR)..."
+	@if [ -d "$(LOG_DIR)" ]; then 						\
+		echo "Cleaning $(LOG_DIR) directory..."; 		\
+		rm -rf $(LOG_DIR)/*; 							\
+	else 												\
+		echo "$(LOG_DIR) directory does not exist."; 	\
+	fi
 
 clean-resources:
+	@echo "Cleaning $(RES_DIR)..."
+	@if [ -d "$(RES_DIR)" ]; then 						\
+		echo "Cleaning $(RES_DIR) directory..."; 		\
+		rm -rf $(RES_DIR)/*; 							\
+	else 												\
+		echo "$(RES_DIR) directory does not exist."; 	\
+	fi
 	rm -f $(RES_DIR)/*
 
 clean: clean-runfiles clean-output clean-logs clean-resources
