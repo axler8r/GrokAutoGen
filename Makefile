@@ -66,11 +66,11 @@ clean: clean-runfiles clean-output clean-logs clean-resources
 
 format:
 	@echo "Formatting $(PROJECT_NAME)..."
-	ruff format
+	uv tool run ruff format
 
 check:
 	@echo "Checking $(PROJECT_NAME)..."
-	ruff check
+	uv tool run ruff check
 
 test:
 	@echo "Testing $(TST_DIR)..."
