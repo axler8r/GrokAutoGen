@@ -89,6 +89,10 @@ spell:
 	foreach file in **/*.md; do if [[ -f "$$file" ]]; then aspell --lang=en_GB check "$$file"; fi; done
 	foreach file in **/*.py; do if [[ -f "$$file" ]]; then aspell --lang=en_GB check "$$file"; fi; done
 
+run:
+	@echo "Running $(PROJECT_NAME)..."
+	uv run
+
 help:
 	@echo "Usage: make [target]"
 	@echo "Targets:"
